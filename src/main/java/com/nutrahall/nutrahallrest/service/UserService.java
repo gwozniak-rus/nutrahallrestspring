@@ -11,12 +11,21 @@ import java.util.Optional;
 public interface UserService {
 
    // User addUser(User user);
-    UserResponse addUser(UserRequest userRequest);
+    User addUser(User user);
 
-    User getUser(Integer id);
+    //User getUser(Integer id);
 
-    User updateUser(User user);
+   // User updateUser(User user);
 
-    public void deleteUser(Integer id);
+   // public void deleteUser(Integer id);
 
+    User getUser(User user);
+
+    /*@Override
+        public User getUser(Integer id){
+            Optional<User> optionalUser = userRepository.findById(id);
+            return optionalUser.get();
+        }*/
+
+    //User getUser(Integer id);
 }

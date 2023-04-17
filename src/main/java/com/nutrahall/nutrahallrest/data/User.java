@@ -1,6 +1,7 @@
 package com.nutrahall.nutrahallrest.data;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.context.annotation.ComponentScan;
 
 import javax.persistence.*;
@@ -66,11 +67,11 @@ public class User {
 
     public String toString(){
         return "User{" +
-                "id" + id +
-                ", firstname" + firstname +'\'' +
-                ", lastname" + lastname +'\'' +
-                ", username" + username +'\'' +
-                ", password" + password +'\'' +
+                "id=" + id +
+                ", firstname='" + firstname +'\'' +
+                ", lastname='" + lastname +'\'' +
+                ", username='" + username +'\'' +
+                ", password='" + password +'\'' +
                 '}';
     }
 }
