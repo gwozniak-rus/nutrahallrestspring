@@ -5,6 +5,7 @@ import com.nutrahall.nutrahallrest.request.UserRequest;
 import com.nutrahall.nutrahallrest.response.UserResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -19,7 +20,11 @@ public interface UserService {
 
    // public void deleteUser(Integer id);
 
+    List<User> listUsers();//this is a try
+
     User getUser(User user);
+
+    //User listUsers(User user);
 
     /*@Override
         public User getUser(Integer id){

@@ -7,29 +7,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(path = "/api/user")
-@CrossOrigin(origins = "http://localhost:8080")
+//@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "*")
 public class userController {
 
     @Autowired
     UserService userService;
 
 
-//adding a user
-    /*@PostMapping(value = "/add")
-    public ResponseEntity<UserResponse>addUser(@RequestBody UserRequest user){
-        UserResponse newUser = userService.addUser(user);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-    }*/
 
-
-   /* @PostMapping(value = "/add")
-    public ResponseEntity<User>addUser(@RequestBody User user){
-        User newUser = userService.addUser(user);
-        return new ResponseEntity<>(newUser,HttpStatus.CREATED);
-    }*/
     @PostMapping(value = "/add")
     public User addUser(@RequestBody User user) {
         if (user.getFirstname() == null) {
@@ -39,8 +30,7 @@ public class userController {
         }
     }
 
-    //get
-   //@GetMapping(value = "/get/{username}")
+
     @PutMapping(value = "/add/User")
    //public ResponseEntity<User>getUser(@RequestBody User user ){
      public User getUser(@RequestBody User user){
@@ -48,7 +38,14 @@ public class userController {
         //user = userService.getUser(user);
             //return new ResponseEntity<>(user, HttpStatus.OK);
     }
-    //find all
+
+
+    //this is a try
+    @GetMapping(value = "/getUsers")
+    public List<User>listUsers(){
+
+        return userService.listUsers();
+    }
 
 
     //update

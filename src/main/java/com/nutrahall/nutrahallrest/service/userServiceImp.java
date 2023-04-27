@@ -5,10 +5,13 @@ import com.nutrahall.nutrahallrest.data.User;
 import com.nutrahall.nutrahallrest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -31,25 +34,16 @@ public class userServiceImp implements UserService {
     }
 
 
-  /*  @Override
-   public UserResponse addUser(UserRequest userRequest){
-        //return userRepository.save(user);
-        User newUser = new User();
-        newUser.setFirstname(userRequest.getFirstname());
-        newUser.setLastname(userRequest.getLastname());
-        newUser.setUsername(userRequest.getUsername());
-        newUser.setPassword(userRequest.getPassword());
-        //time??
-        userRepository.save(newUser);
-        return new UserResponse("user created successfully");
+    //this is a try
+    @Override
+    public List<User> listUsers(){
+        List<User> users = new ArrayList<>();
+        Streamable.of(userRepository.findAll())
+                .forEach(users::add);
+        return users;
+    }
 
-    }*/
 
-    /*@Override
-    public User getUser(Integer id){
-        Optional<User> optionalUser = userRepository.findById(id);
-        return optionalUser.get();
-    }*/
     @Override
     public User getUser(User userDetails){
         
