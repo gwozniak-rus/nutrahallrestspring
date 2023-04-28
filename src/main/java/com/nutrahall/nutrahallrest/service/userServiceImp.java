@@ -1,7 +1,9 @@
 package com.nutrahall.nutrahallrest.service;
 
 
+import com.nutrahall.nutrahallrest.data.Code;
 import com.nutrahall.nutrahallrest.data.User;
+import com.nutrahall.nutrahallrest.repository.CodeRepository;
 import com.nutrahall.nutrahallrest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,6 +29,8 @@ public class userServiceImp implements UserService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    CodeRepository codeRepository;
 
     @Override
     public User addUser(User user){
@@ -62,19 +66,28 @@ public class userServiceImp implements UserService {
         }
     }
 
-   // @Override
-    /*public User updateUser(User user){
-        User existingUser = userRepository.findById(user.getId()).get();
-        existingUser.setFirstname(user.getFirstname());
-        existingUser.setLastname(user.getLastname());
-        existingUser.setUsername(user.getUsername());
-        existingUser.setPassword(user.getPassword());
-        User updatedUser = userRepository.save(existingUser);
-        return updatedUser;
+
+    //this will send code to database
+    @Override
+    public Code addCode(Code code){
+
+        return codeRepository.save(code);
     }
 
-   @Override
-    public void deleteUser(Integer id) {
-        userRepository.deleteById(id);
-    }*/
+//this verifies the code from react
+    @Override
+    public Code findCode(Code codeDetails){
+        TypedQuery<Code> typedQuery = entityManager.createQuery(
+                "FROM Code WHERE code = :code", Code.class);
+        try{
+            Code code = new Code();
+            code = typedQuery.setParameter("code", codeDetails.getCode()).getSingleResult();
+            return typedQuery.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
+
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.nutrahall.nutrahallrest.web;
 
+import com.nutrahall.nutrahallrest.data.Code;
 import com.nutrahall.nutrahallrest.data.User;
 import com.nutrahall.nutrahallrest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class userController {
     UserService userService;
 
 
-
+//this adds user for registration activity
     @PostMapping(value = "/add")
     public User addUser(@RequestBody User user) {
         if (user.getFirstname() == null) {
@@ -30,43 +31,27 @@ public class userController {
         }
     }
 
-
+//this is the query for login activity
     @PutMapping(value = "/add/User")
-   //public ResponseEntity<User>getUser(@RequestBody User user ){
      public User getUser(@RequestBody User user){
         return userService.getUser(user);
-        //user = userService.getUser(user);
-            //return new ResponseEntity<>(user, HttpStatus.OK);
     }
-
-
     //this is a try
+    //this lists user_table for react
     @GetMapping(value = "/getUsers")
     public List<User>listUsers(){
 
         return userService.listUsers();
     }
-
-
-    //update
-    //needs work(may need to add the auto-incremented id
-   /* @PutMapping(value = "/update/{username}")
-    public ResponseEntity<User>updateUser(@PathVariable("username") String username,
-                                          @RequestBody User user){
-        user.setUsername(username);
-        User updatedUser = userService.updateUser(user);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-
+    //sending the code to the database from android studio
+    @PostMapping(value = "/addCode")
+    public Code addCode(@RequestBody Code code){
+        return userService.addCode(code);
     }
-
-
-    //delete method(deletemapping)
-    @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id){
-        userService.deleteUser(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-
-    }*/
+   @PutMapping(value = "/findCode")
+    public Code findCode(@RequestBody Code code){
+        return userService.findCode(code);
+   }
 
 
 
